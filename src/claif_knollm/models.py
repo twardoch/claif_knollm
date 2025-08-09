@@ -14,8 +14,7 @@ from enum import Enum
 from typing import Any, Dict, List, Optional, Set, Union
 from decimal import Decimal
 
-from pydantic import BaseModel, Field, validator, root_validator
-from pydantic.types import PositiveFloat, PositiveInt
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 
 class ModelCapability(str, Enum):
@@ -155,14 +154,16 @@ class Provider(BaseModel):
         use_enum_values = True
         extra = "forbid"
     
-    @validator('name')
+    @field_validator('name')
+    @classmethod
     def validate_name(cls, v):
         """Validate provider name format."""
         if not v.islower() or ' ' in v:
             raise ValueError('Provider name must be lowercase with no spaces')
         return v
     
-    @validator('base_url')
+    @field_validator('base_url')
+    @classmethod
     def validate_base_url(cls, v):
         """Validate base URL format."""
         if not v.startswith(('http://', 'https://')):
@@ -229,19 +230,32 @@ class Model(BaseModel):
         use_enum_values = True
         extra = "forbid"
     
-    @validator('id')
+    @field_validator('id')
+    @classmethod
     def validate_model_id(cls, v):
         """Validate model ID format."""
         if not v or len(v.strip()) == 0:
             raise ValueError('Model ID cannot be empty')
         return v.strip()
     
-    @root_validator
+    @model_validator(mode='before')
+    @classmethod
     def validate_modalities(cls, values):
         """Validate modality consistency."""
+        if not isinstance(values, dict):
+            return values
+            
         input_modalities = values.get('input_modalities', set())
         output_modalities = values.get('output_modalities', set())
         capabilities = values.get('capabilities', set())
+        
+        # Convert to sets if they're not already
+        if not isinstance(input_modalities, set):
+            input_modalities = set(input_modalities) if input_modalities else set()
+        if not isinstance(output_modalities, set):
+            output_modalities = set(output_modalities) if output_modalities else set()
+        if not isinstance(capabilities, set):
+            capabilities = set(capabilities) if capabilities else set()
         
         # If model has vision capability, should have image input modality
         if ModelCapability.VISION in capabilities and ModelModality.IMAGE not in input_modalities:
@@ -334,14 +348,16 @@ class APILibrary(BaseModel):
         use_enum_values = True
         extra = "forbid"
     
-    @validator('name')
+    @field_validator('name')
+    @classmethod
     def validate_name(cls, v):
         """Validate library name format."""
         if not v or len(v.strip()) == 0:
             raise ValueError('Library name cannot be empty')
         return v.strip().lower()
     
-    @validator('rating')
+    @field_validator('rating')
+    @classmethod
     def validate_rating(cls, v):
         """Validate rating is within acceptable range."""
         if v < 1.0 or v > 7.0:
@@ -383,7 +399,7 @@ class SearchFilter(BaseModel):
     
     # Sorting
     sort_by: Optional[str] = Field("name", description="Field to sort by")
-    sort_order: str = Field("asc", regex="^(asc|desc)$", description="Sort order")
+    sort_order: str = Field("asc", pattern="^(asc|desc)$", description="Sort order")
     
     # Pagination
     limit: Optional[int] = Field(None, ge=1, le=1000, description="Maximum number of results")
