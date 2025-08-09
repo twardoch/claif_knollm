@@ -1,4 +1,4 @@
-# this_file: pyproject.toml
+# this_file: claif_knollm/pyproject.toml
 #==============================================================================
 # CLAIF_KNOLLM PACKAGE CONFIGURATION
 # This pyproject.toml defines the package metadata, dependencies, build system,
@@ -10,46 +10,45 @@
 # Core package information used by PyPI and package managers.
 #------------------------------------------------------------------------------
 [project]
-name = 'claif_knollm' # Package name on PyPI
-description = '' # Short description
-readme = 'README.md' # Path to README file
-requires-python = '>=3.10' # Minimum Python version
-keywords = [
-] # Keywords for PyPI search
-dynamic = ["version"] # Fields set dynamically at build time
+name = "claif_knollm"
+description = "Claif provider for Knollm LLM services"
+readme = "README.md"
+requires-python = ">=3.10"
+keywords = ["ai", "llm", "knollm", "claif", "cli"]
+dynamic = ["version"]
 
-# PyPI classifiers for package categorization
 classifiers = [
-    'Development Status :: 4 - Beta', # Package maturity level
-    'Programming Language :: Python',
-    'Programming Language :: Python :: 3.10',
-    'Programming Language :: Python :: 3.11',
-    'Programming Language :: Python :: 3.12',
-    'Programming Language :: Python :: Implementation :: CPython',
-    'Programming Language :: Python :: Implementation :: PyPy',
-    'Operating System :: OS Independent',
-    'License :: OSI Approved :: MIT License',
-    'Intended Audience :: Developers',
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
 
 dependencies = [
-    "claif",
+    "claif>=0.1.0",
+    "httpx>=0.25.0",
+    "pydantic>=2.0.0",
 ]
 
-# Author information
 [[project.authors]]
-name = 'Adam Twardoch'
-email = 'adam+github@twardch.com'
+name = "Adam Twardoch"
+email = "adam+github@twardoch.com"
 
-# License information
 [project.license]
-text = 'MIT'
+text = "MIT"
 
-# Project URLs
 [project.urls]
-Documentation = 'https://github.com/twardoch/claif_knollm#readme'
-Issues = 'https://github.com/twardoch/claif_knollm/issues'
-Source = 'https://github.com/twardoch/claif_knollm'
+Documentation = "https://github.com/twardoch/claif_knollm#readme"
+Issues = "https://github.com/twardoch/claif_knollm/issues"
+Source = "https://github.com/twardoch/claif_knollm"
 
 #------------------------------------------------------------------------------
 # OPTIONAL DEPENDENCIES
@@ -57,39 +56,36 @@ Source = 'https://github.com/twardoch/claif_knollm'
 #------------------------------------------------------------------------------
 [project.optional-dependencies]
 
-# Development tools
 dev = [
-    'pre-commit>=4.1.0', # Pre-commit hook manager - Keep pre-commit as is, update if newer pre-commit version is required
-    'ruff>=0.9.7', # Linting and formatting - Keep ruff as is, update if newer ruff version is required
-    'mypy>=1.15.0', # Type checking - Keep mypy as is, update if newer mypy version is required
-    'absolufy-imports>=0.3.1', # Convert relative imports to absolute - Keep absolufy-imports as is, update if newer absolufy-imports version is required
-    'pyupgrade>=3.19.1', # Upgrade Python syntax - Keep pyupgrade as is, update if newer pyupgrade version is required
-    'isort>=6.0.1', # Sort imports - Keep isort as is, update if newer isort version is required
+    "pre-commit>=4.1.0",
+    "ruff>=0.9.7",
+    "mypy>=1.15.0",
+    "absolufy-imports>=0.3.1",
+    "pyupgrade>=3.19.1",
+    "isort>=6.0.1",
 ]
 
-# Testing tools and frameworks
 test = [
-    'pytest>=8.3.4', # Testing framework - Keep pytest as is, update if newer pytest version is required
-    'pytest-cov>=6.0.0', # Coverage plugin for pytest - Keep pytest-cov as is, update if newer pytest-cov version is required
-    'pytest-xdist>=3.6.1', # Parallel test execution - Keep pytest-xdist as is, update if newer pytest-xdist version is required
-    'pytest-benchmark[histogram]>=5.1.0', # Benchmarking plugin - Keep pytest-benchmark as is, update if newer pytest-benchmark version is required
-    'pytest-asyncio>=0.25.3', # Async test support - Keep pytest-asyncio as is, update if newer pytest-asyncio version is required
-    'coverage[toml]>=7.6.12',
+    "pytest>=8.3.4",
+    "pytest-cov>=6.0.0",
+    "pytest-xdist>=3.6.1",
+    "pytest-benchmark[histogram]>=5.1.0",
+    "pytest-asyncio>=0.25.3",
+    "coverage[toml]>=7.6.12",
 ]
 
 docs = [
     "sphinx>=7.2.6",
     "sphinx-rtd-theme>=2.0.0",
     "sphinx-autodoc-typehints>=2.0.0",
-    "myst-parser>=3.0.0", # Markdown support in Sphinx
+    "myst-parser>=3.0.0",
 ]
 
-# All optional dependencies combined
 all = [
-    'pytest>=7.0.0',
-    'pytest-cov>=4.0.0',
-    'ruff>=0.1.0',
-    'mypy>=1.0.0',
+    "pytest>=8.3.4",
+    "pytest-cov>=6.0.0",
+    "ruff>=0.9.7",
+    "mypy>=1.15.0",
 ]
 
 #------------------------------------------------------------------------------
@@ -105,13 +101,11 @@ knollm = "claif_knollm"
 # Defines the tools required to build the package and the build backend.
 #------------------------------------------------------------------------------
 [build-system]
-# Hatchling is a modern build backend for Python packaging
-# hatch-vcs integrates with version control systems for versioning
 requires = [
-    'hatchling>=1.27.0', # Keep hatchling as is, update if newer hatchling version is required
-    'hatch-vcs>=0.4.0', # Keep hatch-vcs as is, update if newer hatch-vcs version is required
+    "hatchling>=1.27.0",
+    "hatch-vcs>=0.4.0",
 ]
-build-backend = 'hatchling.build' # Specifies Hatchling as the build backend
+build-backend = "hatchling.build"
 
 
 #------------------------------------------------------------------------------
@@ -138,34 +132,26 @@ reproducible = true
 [tool.hatch.build.hooks.vcs]
 version-file = "src/claif_knollm/__version__.py"
 
-# Version source configuration
 [tool.hatch.version]
-source = 'vcs' # Get version from git tags or other VCS info
+source = "vcs"
+raw-options = { local_scheme = "no-local-version" }
 
-# Metadata handling configuration
 [tool.hatch.metadata]
-allow-direct-references = true # Allow direct references in metadata (useful for local dependencies)
+allow-direct-references = true
 
 
 #------------------------------------------------------------------------------
 # DEVELOPMENT ENVIRONMENTS
 
 [tool.hatch.envs.default]
-features = ['dev', 'test', 'all']
-dependencies = [
-]
+features = ["dev", "test", "all"]
+dependencies = []
 
-# Commands available in the default environment
 [tool.hatch.envs.default.scripts]
-# Run tests with optional arguments
-test = 'pytest {args:tests}'
-# Run tests with coverage reporting
+test = "pytest {args:tests}"
 test-cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=src/claif_knollm --cov=tests {args:tests}"
-# Run type checking
 type-check = "mypy src/claif_knollm tests"
-# Run linting and formatting
 lint = ["ruff check src/claif_knollm tests", "ruff format --respect-gitignore src/claif_knollm tests"]
-# Format and fix style issues
 fmt = ["ruff format --respect-gitignore src/claif_knollm tests", "ruff check --fix src/claif_knollm tests"]
 fix = ["ruff check --fix --unsafe-fixes src/claif_knollm tests", "ruff format --respect-gitignore src/claif_knollm tests"]
 
@@ -179,50 +165,34 @@ python = ["3.10", "3.11", "3.12"]
 # Additional environments for specific development tasks.
 #------------------------------------------------------------------------------
 
-# Dedicated environment for linting and code quality checks
 [tool.hatch.envs.lint]
-detached = true # Create a separate, isolated environment
-features = ['dev'] # Use dev extras  dependencies 
+detached = true
+features = ["dev"]
 
-# Linting environment commands
 [tool.hatch.envs.lint.scripts]
-# Type checking with automatic type installation
 typing = "mypy --install-types --non-interactive {args:src/claif_knollm tests}"
-# Check style and format code
 style = ["ruff check {args:.}", "ruff format --respect-gitignore {args:.}"]
-# Format and fix style issues
 fmt = ["ruff format --respect-gitignore {args:.}", "ruff check --fix {args:.}"]
 fix = ["ruff check --fix --unsafe-fixes {args:.}", "ruff format --respect-gitignore {args:.}"]
-# Run all ops
 all = ["style", "typing", "fix"]
 
-# Dedicated environment for testing
 [tool.hatch.envs.test]
-features = ['test'] # Use test extras as dependencies
+features = ["test"]
 
-# Testing environment commands
 [tool.hatch.envs.test.scripts]
-# Run tests in parallel
 test = "python -m pytest -n auto {args:tests}"
-# Run tests with coverage in parallel
 test-cov = "python -m pytest -n auto --cov-report=term-missing --cov-config=pyproject.toml --cov=src/claif_knollm --cov=tests {args:tests}"
-# Run benchmarks
 bench = "python -m pytest -v -p no:briefcase tests/test_benchmark.py --benchmark-only"
-# Run benchmarks and save results
 bench-save = "python -m pytest -v -p no:briefcase tests/test_benchmark.py --benchmark-only --benchmark-json=benchmark/results.json"
 
-# Documentation environment
 [tool.hatch.envs.docs]
-features = ['docs']
+features = ["docs"]
 
-# Documentation environment commands
 [tool.hatch.envs.docs.scripts]
 build = "sphinx-build -b html docs/source docs/build"
 
-# GitHub Actions workflow configuration
 [tool.hatch.envs.ci]
-features = ['test']
-
+features = ["test"]
 
 [tool.hatch.envs.ci.scripts]
 test = "pytest --cov=src/claif_knollm --cov-report=xml"
@@ -243,28 +213,26 @@ test = "pytest --cov=src/claif_knollm --cov-report=xml"
 claif_knollm = ["src/claif_knollm", "*/claif_knollm/src/claif_knollm"]
 tests = ["tests", "*/claif_knollm/tests"]
 
-# Coverage report configuration
 [tool.coverage.report]
-# Lines to exclude from coverage reporting
 exclude_lines = [
-    'no cov', # Custom marker to skip coverage
-    'if __name__ == .__main__.:', # Script execution guard
-    'if TYPE_CHECKING:', # Type checking imports and code
-    'pass', # Empty pass statements
-    'raise NotImplementedError', # Unimplemented method placeholders
-    'raise ImportError', # Import error handling
-    'except ImportError', # Import error handling
-    'except KeyError', # Common error handling
-    'except AttributeError', # Common error handling
-    'except NotImplementedError', # Common error handling
+    "no cov",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "pass",
+    "raise NotImplementedError",
+    "raise ImportError",
+    "except ImportError",
+    "except KeyError",
+    "except AttributeError",
+    "except NotImplementedError",
 ]
 
 [tool.coverage.run]
 source_pkgs = ["claif_knollm", "tests"]
-branch = true # Measure branch coverage (if/else statements)
-parallel = true # Support parallel test execution
+branch = true
+parallel = true
 omit = [
-    "src/claif_knollm/__about__.py",
+    "src/claif_knollm/__version__.py",
 ]
 
 #------------------------------------------------------------------------------
@@ -308,14 +276,12 @@ markers = [
     "benchmark: marks tests as benchmarks (select with '-m benchmark')",
     "unit: mark a test as a unit test",
     "integration: mark a test as an integration test",
-    "permutation: tests for permutation functionality", 
-    "parameter: tests for parameter parsing",
-    "prompt: tests for prompt parsing",
+    "knollm: tests for knollm provider functionality",
 ]
 norecursedirs = [
     ".*",
     "build",
-    "dist", 
+    "dist",
     "venv",
     "__pycache__",
     "*.egg-info",
@@ -411,8 +377,7 @@ ignore = [
     'S106', # Possible hardcoded password - often false positives
     'S107', # Possible hardcoded password - often false positives
     'S110', # try-except-pass - sometimes valid for suppressing exceptions
-    'SIM102'
-    # Nested if statements - sometimes more readable than combined conditions
+    'SIM102', # Nested if statements - sometimes more readable than combined conditions
 ]
 # Rules that should not be automatically fixed
 unfixable = [
@@ -422,20 +387,15 @@ unfixable = [
 # Configure extend-exclude to ignore specific directories
 extend-exclude = [".git", ".venv", "venv", "dist", "build"]
 
-# isort configuration within Ruff
 [tool.ruff.lint.isort]
-known-first-party = ['claif_knollm'] # Treat as first-party imports for sorting
+known-first-party = ["claif_knollm"]
 
-# flake8-tidy-imports configuration within Ruff
 [tool.ruff.lint.flake8-tidy-imports]
-ban-relative-imports = 'all' # Ban all relative imports for consistency
+ban-relative-imports = "all"
 
-# Per-file rule exceptions
 [tool.ruff.lint.per-file-ignores]
-# Tests can use magic values, assertions, and relative imports
-'tests/**/*' = [
-    'PLR2004', # Allow magic values in tests for readability
-    'S101', # Allow assertions in tests
-    'TID252'
-    # Allow relative imports in tests for convenience
+"tests/**/*" = [
+    "PLR2004",
+    "S101",
+    "TID252",
 ]
