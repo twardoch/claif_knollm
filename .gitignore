@@ -314,3 +314,8 @@ Thumbs.db
 __version__.py
 _private
 VERSION.txt
+src/claif_knollm/_version.py
+.DS_Store
+_private
+work
+
